@@ -1,0 +1,51 @@
+# Server Management Settings
+server:
+  port: 8080
+
+management:
+  endpoint:
+    health:
+      show-components: always
+      show-details: always
+
+# Spring Configuration
+spring:
+  application:
+    name: Merchant Starter
+  profiles:
+    active: Sandbox, Development
+  data:
+    rest:
+      base-path: /services
+
+# DataSource Properties
+  datasource:
+    driver-class-name: org.h2.Driver
+    name: SandboxDB
+    url: jdbc:h2:mem:sandboxdb;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: password
+#H2 settings
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+# JPA Properties
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    defer-datasource-initialization: true
+
+# Logger Settings
+logging:
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+
+  # -- HTTPRequestResponseLoggingFilter: TRACE(HEADERS), DEBUG(NO HEADERS), INFO (OFF)
+  level:
+    ninja.digitalcloud.application.backend.configurations.filters.HTTPRequestResponseLoggingFilter: DEBUG
+    ninja.digitalcloud.application.backend.*: DEBUG
+
